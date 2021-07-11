@@ -1,0 +1,15 @@
+{
+  "name": "comment-for-translation",
+  "version": "0.1.0",
+  "description": "Generate HTML comment by duplicating the contents.",
+  "main": "cli.js",
+  "author": "Akira Tachibana <atachibana@unofficialtokyo.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "test": "node cli.js test1.md && diff test1-new.md test1-expected.md"
+  },
+  "dependencies": {
+    "commander": "^8.0.0"
+  }
+}
