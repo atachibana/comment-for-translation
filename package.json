@@ -7,12 +7,15 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint cli.js __tests__/*.js"
   },
   "dependencies": {
-    "commander": "^8.0.0"
+    "commander": "^8.0.0",
+    "eslint-plugin-jest": "^24.3.6"
   },
   "devDependencies": {
+    "eslint": "^7.30.0",
     "jest": "^27.0.6"
   }
 }

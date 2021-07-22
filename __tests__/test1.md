@@ -17,4 +17,7 @@ Real-time discussions for development take place in `#core-editor` and `#core-js
 function(a)
 ```
 
+[Development Environment tutorial](/docs/getting-started/tutorials/devenv/README.md)
+See [our Development Tools guide](/docs/getting-started/tutorials/devenv/README.md#development-tools) or the Nodejs
+
 [原文](https://github.com/WordPress/gutenberg/blob/trunk/docs/contributors/develop.md)

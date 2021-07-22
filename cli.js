@@ -17,9 +17,13 @@ const writeToStream = (buffer, oStream, addComment) => {
             oStream.write('-->\n')
         }
         buffer.forEach(oneline => {
-            var replaced = oneline.replace(/\]\(\/docs\/(.*)\.md/g, '\]\(https:\/\/ja\.wordpress\.org\/team\/handbook\/block-editor\/$1')
+            let rep1 = oneline
+            // Rule: /docs/.../dir1/README.md -> https://ja.wordpress.org/.../dir1/
+            rep1 = rep1.replace(/\]\(\/docs\/(.*)README\.md/g, '](https://ja.wordpress.org/team/handbook/block-editor/$1')
+            // Rule: /docs/.../dir1/contents1.md -> https://ja.wordpress.org/.../dir1/contents1
+            rep1 = rep1.replace(/\]\(\/docs\/(.*)\.md/g, '](https://ja.wordpress.org/team/handbook/block-editor/$1')
             // replaced = replaced.replace(
-            oStream.write(replaced + '\n')
+            oStream.write(rep1 + '\n')
         })
     }
 }
@@ -28,25 +32,33 @@ const generateComment = async (
     mdFile,
     outputDir
 ) => {
-    outputDir = outputDir ? outputDir.replace(/\/$/, '') + '/' : './'
-
-    if (fs.existsSync(outputDir)) {
-        // console.log('Output directory %s already exists', outputDir);
+    const rs = fs.createReadStream(mdFile)
+    var ws = ''
+    if (mdFile.startsWith('/')) {
+        // mdFile was speccified with absolute path.
+        // In case of that, outputDir is ignored.
+        ws = fs.createWriteStream(mdFile.replace(/(.*)\.md/, '$1-new.md'))
     } else {
-        fs.mkdir(outputDir, { recursive: true }, (err) => {
-            if (err) {
-                console.error(
-                    'Could not create output directory. Make sure you have right permission on the directory and try again.'
-                )
-                throw err;
-            }
-            console.log('Created output directory %s', outputDir)
-        });
+        outputDir = outputDir ? outputDir.replace(/\/$/, '') + '/' : './'
+        if (fs.existsSync(outputDir)) {
+            // console.log('Output directory %s already exists', outputDir);
+        } else {
+            fs.mkdir(outputDir, { recursive: true }, (err) => {
+                if (err) {
+                    console.error(
+                        'Could not create output directory. Make sure you have right permission on the directory and try again.'
+                    )
+                    throw err
+                }
+                console.log('Created output directory %s', outputDir)
+            })
+        }
+        ws = fs.createWriteStream(outputDir + mdFile.replace(/(.*)\.md/, '$1-new.md'))
     }
 
-    const rs = fs.createReadStream(mdFile)
+    // 
     // const ws = fs.createWriteStream(outputDir + mdFile + '.new')
-    const ws = fs.createWriteStream(outputDir + mdFile.replace(/(.*)\.md/, '$1-new\.md'))
+    // const ws = fs.createWriteStream(outputDir + mdFile.replace(/(.*)\.md/, '$1-new.md'))
 
     const rl = readline.createInterface({
         input: rs,
@@ -54,7 +66,7 @@ const generateComment = async (
     })
 
     var buffer = []
-    var inCode = false;
+    var inCode = false
 
     rl.on('line', (lineString) => {
         if (inCode) {
@@ -62,12 +74,12 @@ const generateComment = async (
             if (lineString.startsWith('```')) {
                 writeToStream(buffer, ws, false)
                 buffer = []
-                inCode = false;
+                inCode = false
             }
         } else {
             if (lineString.startsWith('```')) {
                 buffer.push(lineString)
-                inCode = true;
+                inCode = true
             } else if (lineString === '') {
                 writeToStream(buffer, ws, true)
                 buffer = []

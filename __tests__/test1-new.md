@@ -40,6 +40,13 @@ function(a)
 ```
 
 <!--
+[Development Environment tutorial](/docs/getting-started/tutorials/devenv/README.md)
+See [our Development Tools guide](/docs/getting-started/tutorials/devenv/README.md#development-tools) or the Nodejs
+-->
+[Development Environment tutorial](https://ja.wordpress.org/team/handbook/block-editor/getting-started/tutorials/devenv/)
+See [our Development Tools guide](https://ja.wordpress.org/team/handbook/block-editor/getting-started/tutorials/devenv/#development-tools) or the Nodejs
+
+<!--
 [原文](https://github.com/WordPress/gutenberg/blob/trunk/docs/contributors/develop.md)
 -->
 [原文](https://github.com/WordPress/gutenberg/blob/trunk/docs/contributors/develop.md)
