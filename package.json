@@ -1,14 +1,16 @@
 {
   "name": "comment-for-translation",
-  "version": "0.1.0",
+  "version": "0.4.0",
   "description": "Generate HTML comment by duplicating the contents.",
   "main": "cli.js",
   "author": "Akira Tachibana <atachibana@unofficialtokyo.com>",
   "license": "MIT",
   "private": false,
   "scripts": {
-    "test": "jest",
-    "lint": "eslint cli.js __tests__/*.js"
+    "test": "npm run prettier-check && npm run lint && jest",
+    "lint": "eslint cli.js __tests__/*.js",
+    "prettier": "prettier cli.js __tests__/*.js --write",
+    "prettier-check": "prettier cli.js __tests__/*.js --list-different"
   },
   "dependencies": {
     "commander": "^8.0.0",
@@ -16,6 +18,8 @@
   },
   "devDependencies": {
     "eslint": "^7.30.0",
-    "jest": "^27.0.6"
+    "eslint-config-prettier": "^8.3.0",
+    "jest": "^27.0.6",
+    "prettier": "^2.3.2"
   }
 }
