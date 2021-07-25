@@ -14,7 +14,7 @@ const writeToStream = (buffer, oStream, addComment) => {
             buffer.forEach((oneline) => {
                 oStream.write(oneline + '\n')
             })
-            // oStream.write('-->\n')
+            oStream.write('-->\n')
         }
         buffer.forEach((oneline) => {
             let rep1 = oneline
