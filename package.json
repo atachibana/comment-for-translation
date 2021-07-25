@@ -1,6 +1,6 @@
 {
   "name": "comment-for-translation",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Generate HTML comment by duplicating the contents.",
   "main": "cli.js",
   "author": "Akira Tachibana <atachibana@unofficialtokyo.com>",
