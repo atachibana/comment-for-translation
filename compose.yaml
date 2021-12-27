@@ -1,0 +1,6 @@
+services:
+  cli:
+    image: "node:17"
+    volumes:
+      - .:/cli
+    tty: true

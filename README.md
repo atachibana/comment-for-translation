@@ -18,6 +18,7 @@ will be processed as:
 # Code Contributions
 -->
 # Code Contributions
+
 <!--
 A guide on how to get started contributing code to the Gutenberg project.
 -->
@@ -31,6 +32,7 @@ Then, translator can translate the contents.
 # Code Contributions
 -->
 # コードでのコントリビューション
+
 <!--
 A guide on how to get started contributing code to the Gutenberg project.
 -->
@@ -53,3 +55,16 @@ $ node cli.js <markdown-file>
 ## Options
 - `o, --output-dir` <output-dir> Specify the directory to save files (default `./`)
 
+## Development
+
+```bash
+% git clone git@github.com:atachibana/comment-for-translation.git
+% cd comment-for-translation
+
+(option: when you do not have node environment)
+% docker compose up -d
+% docker compose exec cli sh
+
+% npm install
+% npm test
+```
